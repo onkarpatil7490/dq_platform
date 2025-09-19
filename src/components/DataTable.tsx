@@ -26,8 +26,8 @@ export function DataTable({
   const getCellStyle = (columnName: string, rowIndex: number) => {
     if (!validationResult) return '';
     
-    const isValid = validationResult.rowValidation[rowIndex];
-    if (columnName === selectedColumn) {
+    const isValid = validationResult.rowValidation?.[rowIndex];
+    if (columnName === selectedColumn && isValid !== undefined) {
       return isValid ? 'bg-success/20 text-success-glow' : 'bg-error/20 text-error-glow';
     }
     return '';
@@ -91,7 +91,7 @@ export function DataTable({
                       )}
                     >
                       <div className="truncate max-w-[200px]">
-                        {row[column.name] ?? (
+                        {row[data.columns.indexOf(column)] ?? (
                           <span className="text-muted-foreground italic">null</span>
                         )}
                       </div>
@@ -108,8 +108,12 @@ export function DataTable({
 }
 
 function ColumnInfoButton({ column }: { column: Column }) {
-  const nullPercentage = ((column.nullCount / column.totalValues) * 100).toFixed(1);
-  const uniquePercentage = ((column.uniqueValues / column.totalValues) * 100).toFixed(1);
+  const nullPercentage = column.null_count && column.total_values 
+    ? ((column.null_count / column.total_values) * 100).toFixed(1)
+    : '0.0';
+  const uniquePercentage = column.unique_values && column.total_values
+    ? ((column.unique_values / column.total_values) * 100).toFixed(1)
+    : '0.0';
 
   return (
     <Popover>
@@ -133,21 +137,21 @@ function ColumnInfoButton({ column }: { column: Column }) {
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Total Values:</span>
-              <span className="text-foreground">{column.totalValues.toLocaleString()}</span>
+              <span className="text-foreground">{column.total_values?.toLocaleString() || 'N/A'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Unique Values:</span>
               <span className="text-foreground">
-                {column.uniqueValues.toLocaleString()} ({uniquePercentage}%)
+                {column.unique_values?.toLocaleString() || 'N/A'} ({uniquePercentage}%)
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Null Count:</span>
               <span className={cn(
                 "font-medium",
-                column.nullCount > 0 ? "text-warning" : "text-success"
+                (column.null_count || 0) > 0 ? "text-warning" : "text-success"
               )}>
-                {column.nullCount.toLocaleString()} ({nullPercentage}%)
+                {(column.null_count || 0).toLocaleString()} ({nullPercentage}%)
               </span>
             </div>
           </div>
