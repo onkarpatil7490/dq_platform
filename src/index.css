@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Night Mode Data Quality Dashboard Design System */
+
+@layer base {
+  :root {
+    /* Night Mode Color Palette */
+    --background: 222 20% 6%;
+    --background-secondary: 222 18% 8%;
+    --background-tertiary: 222 16% 10%;
+    --foreground: 210 40% 98%;
+    
+    /* Card & Surface Colors */
+    --card: 222 18% 8%;
+    --card-secondary: 222 16% 12%;
+    --card-foreground: 210 40% 98%;
+    
+    /* Interactive Elements */
+    --popover: 222 18% 8%;
+    --popover-foreground: 210 40% 98%;
+    
+    /* Brand & Accent Colors */
+    --primary: 204 94% 58%;
+    --primary-glow: 204 94% 68%;
+    --primary-foreground: 222 20% 6%;
+    
+    --secondary: 222 16% 14%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --accent: 270 91% 65%;
+    --accent-glow: 270 91% 75%;
+    --accent-foreground: 222 20% 6%;
+    
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --success-glow: 142 76% 46%;
+    --warning: 45 93% 47%;
+    --warning-glow: 45 93% 57%;
+    --error: 0 72% 51%;
+    --error-glow: 0 72% 61%;
+    --info: 217 91% 60%;
+    --info-glow: 217 91% 70%;
+    
+    /* Semantic Colors */
+    --muted: 222 16% 16%;
+    --muted-foreground: 215 20% 65%;
+    
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+    
+    /* Borders & Inputs */
+    --border: 222 16% 18%;
+    --border-secondary: 222 16% 22%;
+    --input: 222 16% 12%;
+    --ring: 204 94% 58%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(204 94% 58%) 0%, hsl(270 91% 65%) 100%);
+    --gradient-surface: linear-gradient(180deg, hsl(222 18% 8%) 0%, hsl(222 16% 10%) 100%);
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(204 94% 58% / 0.15) 0%, transparent 70%);
+    
+    /* Shadows & Effects */
+    --shadow-glow: 0 0 40px hsl(204 94% 58% / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(222 20% 2% / 0.5);
+    --shadow-elevated: 0 20px 60px -20px hsl(222 20% 2% / 0.7);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
